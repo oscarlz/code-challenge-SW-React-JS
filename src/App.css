@@ -1,0 +1,59 @@
+.delete-checkbox {
+   text-align: left;
+}
+
+.form-row {
+   display: flex;
+   background-color: aqua;
+   width: 500px;
+   padding: 10px;
+   margin-left: 30px;
+}
+
+.form-row > span {
+   flex: 1;
+   font-size: normal;
+}
+
+.form-row > label {
+   margin-top:-15px;
+   flex: 4;
+}
+
+.form-row > input, select {
+   flex: 4;
+}
+
+button {
+   box-shadow: 3px 4px;
+   text-transform: uppercase;
+   font-size: small;
+   margin: 10px;
+   padding: 5px;
+}
+
+.footer {
+   text-align: center;
+   position: fixed;
+   bottom: 20px;
+   width: 100%;
+}
+
+.alert {
+   margin-left: 30px;
+   padding: 10px;
+   color:red;
+   font-weight: bold;
+}
+
+.tile {
+   border: 1px solid black;
+   padding: 20px;
+   text-align: center;
+}
+
+.checkbox {
+   text-align: left;
+   position: relative;
+   top: -10px;
+}
