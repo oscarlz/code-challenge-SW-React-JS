@@ -10,7 +10,7 @@ const ProductList = () => {
   // Fetch current products from backend
   useEffect(() => {
     const getProducts = async () => {
-      let p = await axios.get('http://127.0.0.1/scandiweb-backend/index.php/product/get-products');
+      let p = await axios.get('http://127.0.0.1/scandiweb-backend/index.php/products/get-products');
       setProducts(p.data);
     }
 
@@ -32,8 +32,8 @@ const ProductList = () => {
     if(productsIdsToDelete.length > 0){
         
       // Hit endpoint to mass delete these ids
-        const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/product/delete-products', JSON.stringify(productsIdsToDelete));
-
+        const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/delete-products', JSON.stringify(productsIdsToDelete));
+      console.log(resp)
         if(resp.status === 200){
             // update ProductList
             // let newProductsGrid = products.filter((product) => (productsIdsToDelete.indexOf(product.id) < 0))
