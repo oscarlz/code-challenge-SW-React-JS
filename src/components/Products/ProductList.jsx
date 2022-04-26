@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import ProductsTile from './Products/ProductsTile';
+import ProductsTile from './ProductTile';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 const ProductList = () => {
-  
   const [products, setProducts] = useState([]);
 
   // Fetch current products from backend
   useEffect(() => {
+    
     const getProducts = async () => {
-      let p = await axios.get('http://127.0.0.1/scandiweb-backend/index.php/products/get-products');
+      let p = await axios.get('http://127.0.0.1/scandiweb-backend/index.php/products/get-products')
       setProducts(p.data);
     }
 
@@ -33,11 +33,9 @@ const ProductList = () => {
         
       // Hit endpoint to mass delete these ids
         const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/delete-products', JSON.stringify(productsIdsToDelete));
-      console.log(resp)
+      
         if(resp.status === 200){
             // update ProductList
-            // let newProductsGrid = products.filter((product) => (productsIdsToDelete.indexOf(product.id) < 0))
-            
             setProducts((product) => product.filter((product) => (productsIdsToDelete.indexOf(product.id) < 0)))
         }
     }
@@ -45,7 +43,7 @@ const ProductList = () => {
 
   return (
     <div>
-      <div style={topbarStyle}>
+      <div className='topbar'>
         <h3>Product List</h3>
         <div>
             <Link to="/product-add"><button>Add</button></Link>
@@ -54,7 +52,7 @@ const ProductList = () => {
     </div>
     <hr></hr>
 
-      <div style={productsGrid}>
+      <div className='products-grid'>
       {products.length > 0 ? products.map((product) => {
         return (
             <ProductsTile key={product.id} product={product}/>
@@ -65,22 +63,6 @@ const ProductList = () => {
       </div>
     </div>
   )
-}
-
-const productsGrid = {
-  display: 'flex',
-  gap: '3rem',
-  flexWrap: 'wrap',
-  paddingLeft: '30px',
-  paddingRight: '30px',
-  marginTop: '30px'
-}
-
-const topbarStyle = {
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center'
-  
 }
 
 export default ProductList

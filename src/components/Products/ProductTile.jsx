@@ -3,7 +3,7 @@ import Dvd from './Tiles/Dvd'
 import Furniture from './Tiles/Furniture'
 import Book from './Tiles/Book'
 
-const ProductsTile = ({product}) => {
+const ProductTile = ({product}) => {
   let productTile = ''
 
  switch(product.type){
@@ -29,4 +29,4 @@ const ProductsTile = ({product}) => {
   )
 }
 
-export default ProductsTile
+export default ProductTile

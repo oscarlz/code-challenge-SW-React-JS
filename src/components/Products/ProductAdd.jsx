@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-import Alert from './Alert'
+import { Link, useNavigate } from 'react-router-dom'
+import Alert from '../layout/Alert'
 import axios from 'axios'
 
 
 const ProductAdd = () => {
 
-  const navigate = useNavigate();
   let productTypes = ['Book', 'DVD', 'Furniture'];
-  const [alertStatus, setAlertStatus] = useState(0)
+  const navigate = useNavigate();
+  const [alert, setAlert] = useState({})
   
   const typeSelectorChange = (element) => {
     resetTypesSelector();
@@ -24,15 +24,14 @@ const ProductAdd = () => {
 
   const insertNewProduct = async () => {
 
-    //validate all the mandatory fields
+    // Validate all the mandatory fields
     let formIsValid = validateFields();
 
     if(formIsValid === true){
 
-      //validate the SKU is unique
+      // Validate the SKU is unique
       let skuExists = await doesSkuExists(document.getElementById('sku').value);
-      // console.log('sku exists ')
-      // console.log(skuExists)
+
       if(skuExists === false){
         
         const payload = {
@@ -46,27 +45,28 @@ const ProductAdd = () => {
           length: document.getElementById('length').value,
           weight: document.getElementById('weight').value
         }
-    
-        const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/add-product', JSON.stringify(payload));
-        console.log(resp)
-   
-        if(resp.status === 200){
-          // Everything OK. Redirect to product list.
-          navigate("/")
+        
+        try{
+          
+          const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/add-product', JSON.stringify(payload));
 
-        }else{
-          // There was an error.
-          console.log('Error ' + resp)
+          if(resp.status === 200){
+            // Everything OK. Redirect to product list.
+            navigate("/")
+          }
+        }catch(error){
+          // Backend server error
+          setAlert({'show': true, 'alertMsg': 'There was a problem with the backend. So sorry.'})
         }
+
       }else{  
         // SKU needs to be unique, warm the user.
-        setAlertStatus(2);
+        setAlert({'show': true, 'alertMsg': 'SKU not unique. Please use another.'});
       }
 
 
     }else{
-      console.log('nop')
-      setAlertStatus(1);
+      setAlert({'show' : true, 'alertMsg': 'All the fields are required. Please fill them.'})
     }
   }
 
@@ -113,7 +113,7 @@ const ProductAdd = () => {
 
   return (
     <>
-        <div style={divProductAdd}>
+        <div className='topbar'>
             <h3>Product Add</h3>
             <div>
               <button onClick={() => insertNewProduct()}>Save</button>
@@ -121,7 +121,7 @@ const ProductAdd = () => {
             </div>
         </div>
         <hr></hr>
-        <Alert alertStatus={alertStatus}/>
+        <Alert alert={alert}/>
           
           <form id="product_form">
             <div className='form-row'>
@@ -189,12 +189,5 @@ const ProductAdd = () => {
     </>
   )
 }
-
-const divProductAdd = {
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center'
-}
-
 
 export default ProductAdd

@@ -1,9 +1,9 @@
 import './App.css'
-import './components/ProductAdd'
+import './components/products/ProductAdd'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ProductAdd from './components/ProductAdd';
-import ProductList from './components/ProductList'
-import Footer from './components/Footer'
+import ProductAdd from './components/products/ProductAdd';
+import ProductList from './components/products/ProductList'
+import Footer from './components/layout/Footer'
 
 function App() {
 
