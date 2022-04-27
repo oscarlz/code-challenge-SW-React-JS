@@ -18,7 +18,6 @@ const ProductTile = ({product}) => {
    case 'Book':
     productTile = <Book product={product} />
     break;
-
  }
 
   return (

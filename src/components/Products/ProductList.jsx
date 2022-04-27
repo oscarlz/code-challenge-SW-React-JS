@@ -10,8 +10,8 @@ const ProductList = () => {
   useEffect(() => {
     
     const getProducts = async () => {
-      let p = await axios.get('http://127.0.0.1/scandiweb-backend/index.php/products/get-products')
-      setProducts(p.data);
+      let productsFromServer = await axios.get('http://127.0.0.1/scandiweb-backend/index.php/products/get-products')
+      setProducts(productsFromServer.data);
     }
 
     getProducts();
@@ -30,14 +30,19 @@ const ProductList = () => {
     }
 
     if(productsIdsToDelete.length > 0){
-        
       // Hit endpoint to mass delete these ids
+      try {
+        
         const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/delete-products', JSON.stringify(productsIdsToDelete));
       
         if(resp.status === 200){
-            // update ProductList
+            // Update ProductList
             setProducts((product) => product.filter((product) => (productsIdsToDelete.indexOf(product.id) < 0)))
         }
+      }catch (error){
+        // Log error somewhere
+        console.log(error)
+      }
     }
 }
 
@@ -47,7 +52,7 @@ const ProductList = () => {
         <h3>Product List</h3>
         <div>
             <Link to="/product-add"><button>Add</button></Link>
-            <button onClick={massDelete}>Mass delete</button>
+            <button id="delete-product-btn" onClick={massDelete}>Mass delete</button>
         </div>
     </div>
     <hr></hr>

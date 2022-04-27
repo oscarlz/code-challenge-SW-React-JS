@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../layout/Alert'
 import axios from 'axios'
 
-
 const ProductAdd = () => {
 
   let productTypes = ['Book', 'DVD', 'Furniture'];
@@ -36,7 +35,7 @@ const ProductAdd = () => {
         
         const payload = {
           sku: document.getElementById('sku').value,
-          title: document.getElementById('name').value,
+          name: document.getElementById('name').value,
           price: document.getElementById('price').value,
           type: document.getElementById('productType').value,
           size: document.getElementById('size').value,
@@ -76,17 +75,18 @@ const ProductAdd = () => {
     const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/check-sku', JSON.stringify({sku: sku}));
 
     return (resp.data.exists == true ? true : false)
-
   }
 
   const validateFields = () => {
+
     if(document.getElementById('sku').value === '' || 
         document.getElementById('name').value === '' ||
         document.getElementById('price').value === '' ||
         document.getElementById('productType').value === '-'){
+
           return false;
     }
-
+    
     // Check attributes by type
     if(document.getElementById('productType').value === 'DVD'){
       if(document.getElementById('size').value === ''){
@@ -133,7 +133,7 @@ const ProductAdd = () => {
               <input name="name" id="name"></input>
             </div>
             <div className='form-row'>
-              <span>Price:</span>
+              <span>Price ($):</span>
               <input type="number" name="price" id="price"></input>
             </div>
             <div className='form-row'>
