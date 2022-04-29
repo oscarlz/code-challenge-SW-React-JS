@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const ProductAdd = () => {
 
-  let productTypes = ['Book', 'DVD', 'Furniture'];
+  const productTypes = ['BOOK', 'DVD', 'FURNITURE'];
   const navigate = useNavigate();
   const [alert, setAlert] = useState({})
   
@@ -94,7 +94,7 @@ const ProductAdd = () => {
       }
     }
 
-    if(document.getElementById('productType').value === 'Furniture'){
+    if(document.getElementById('productType').value === 'FURNITURE'){
       if(document.getElementById('height').value === '' ||
           document.getElementById('width').value === '' || 
           document.getElementById('length').value === ''){
@@ -102,7 +102,7 @@ const ProductAdd = () => {
       }
     }
 
-    if(document.getElementById('productType').value === 'Book'){
+    if(document.getElementById('productType').value === 'BOOK'){
       if(document.getElementById('weight').value === ''){
         return false;
       }
@@ -141,8 +141,8 @@ const ProductAdd = () => {
               <select name="productType" id="productType" onChange={(e) => typeSelectorChange(e.target.value)}>
                         <option value="-">Type Switcher</option>
                         <option value="DVD" id="DVD">DVD</option>
-                        <option value="Furniture" id="Furniture">Furniture</option>
-                        <option value="Book" id="Book">Book</option>
+                        <option value="FURNITURE" id="Furniture">Furniture</option>
+                        <option value="BOOK" id="Book">Book</option>
                </select>
             </div>
             <div id='DVD_more_info' style={{display:'none'}}>
@@ -155,7 +155,7 @@ const ProductAdd = () => {
                     <label>Please provide disk size in MB format</label>
                 </div>
             </div>
-            <div id='Furniture_more_info' style={{display:'none'}}>
+            <div id='FURNITURE_more_info' style={{display:'none'}}>
                 <div className='form-row'  >
                     <span>Height (CM):</span>
                     <input type="number" step="0.1" name="height" id="height"></input>
@@ -174,7 +174,7 @@ const ProductAdd = () => {
                 </div>
             </div>
 
-            <div id='Book_more_info' style={{display:'none'}}>
+            <div id='BOOK_more_info' style={{display:'none'}}>
                 <div className='form-row'  >
                     <span>Weight (KG):</span>
                     <input name="weight" type="number" step="0.1" id="weight"></input>

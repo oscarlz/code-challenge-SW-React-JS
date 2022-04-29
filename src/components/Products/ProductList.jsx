@@ -11,7 +11,7 @@ const ProductList = () => {
     
     const getProducts = async () => {
       let productsFromServer = await axios.get('http://127.0.0.1/scandiweb-backend/index.php/products/get-products')
-      setProducts(productsFromServer.data);
+      setProducts(productsFromServer.data)
     }
 
     getProducts();
@@ -32,9 +32,9 @@ const ProductList = () => {
     if(productsIdsToDelete.length > 0){
       // Hit endpoint to mass delete these ids
       try {
-        
+
         const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/delete-products', JSON.stringify(productsIdsToDelete));
-      
+
         if(resp.status === 200){
             // Update ProductList
             setProducts((product) => product.filter((product) => (productsIdsToDelete.indexOf(product.id) < 0)))

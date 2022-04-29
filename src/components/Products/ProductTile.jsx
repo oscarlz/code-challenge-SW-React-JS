@@ -4,18 +4,18 @@ import Furniture from './Tiles/Furniture'
 import Book from './Tiles/Book'
 
 const ProductTile = ({product}) => {
-  let productTile = ''
+  let productTile = null
 
- switch(product.type){
+ switch(product.type_code){
    case 'DVD':
     productTile = <Dvd product={product} />
     break;
 
-   case 'Furniture':
+   case 'FURNITURE':
     productTile = <Furniture product={product} />
     break;
 
-   case 'Book':
+   case 'BOOK':
     productTile = <Book product={product} />
     break;
  }
