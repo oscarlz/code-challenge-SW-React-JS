@@ -32,7 +32,7 @@ const ProductAdd = () => {
       let skuExists = await doesSkuExists(document.getElementById('sku').value);
 
       if(skuExists === false){
-        
+
         const payload = {
           sku: document.getElementById('sku').value,
           name: document.getElementById('name').value,
@@ -46,9 +46,8 @@ const ProductAdd = () => {
         }
         
         try{
+          const resp = await axios.post('https://nnabica.cl/codechallenge/github/index.php/products/add-product', JSON.stringify(payload));
           
-          const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/add-product', JSON.stringify(payload));
-
           if(resp.status === 200){
             // Everything OK. Redirect to product list.
             navigate("/")
@@ -72,7 +71,7 @@ const ProductAdd = () => {
   // Ask the backend about the new sku to be created
   const doesSkuExists = async (sku) => {
 
-    const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/check-sku', JSON.stringify({sku: sku}));
+    const resp = await axios.post('https://nnabica.cl/codechallenge/github/index.php/products/check-sku', JSON.stringify({sku: sku}));
 
     return (resp.data.exists == true ? true : false)
   }
