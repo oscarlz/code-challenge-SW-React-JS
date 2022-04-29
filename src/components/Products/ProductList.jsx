@@ -10,7 +10,7 @@ const ProductList = () => {
   useEffect(() => {
     
     const getProducts = async () => {
-      let productsFromServer = await axios.get('http://127.0.0.1/scandiweb-backend/index.php/products/get-products')
+      let productsFromServer = await axios.get('https://nnabica.cl/codechallenge/github/index.php/products/get-products')
       setProducts(productsFromServer.data)
     }
 
@@ -33,7 +33,7 @@ const ProductList = () => {
       // Hit endpoint to mass delete these ids
       try {
 
-        const resp = await axios.post('http://127.0.0.1/scandiweb-backend/index.php/products/delete-products', JSON.stringify(productsIdsToDelete));
+        const resp = await axios.post('https://nnabica.cl/codechallenge/github/index.php/products/delete-products', JSON.stringify(productsIdsToDelete));
 
         if(resp.status === 200){
             // Update ProductList
