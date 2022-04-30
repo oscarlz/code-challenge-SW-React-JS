@@ -17,7 +17,7 @@ const Furniture = ({product}) => {
             <div>{sku}</div>
             <div>{name}</div>
             <div>{price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} $</div>
-            <div>Dimensions (HxWxL): {height.toFixed(1)}x{width.toFixed(1)}x{length.toFixed(1)}</div>
+            <div>Dimensions (HxWxL): {height}x{width}x{length}</div>
         </div>
       )
 }
