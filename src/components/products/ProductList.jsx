@@ -51,8 +51,8 @@ const ProductList = () => {
       <div className='topbar'>
         <h3>Product List</h3>
         <div>
-            <Link to="/product-add"><button>Add</button></Link>
-            <button id="delete-product-btn" onClick={massDelete}>Mass delete</button>
+            <Link to="/product-add"><button>ADD</button></Link>
+            <button id="delete-product-btn" onClick={massDelete}>MASS DELETE</button>
         </div>
     </div>
     <hr></hr>
